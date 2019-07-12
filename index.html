@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Monty Python Deal or No Deal</title>
+    <script src="jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="MyStyle.css">
+</head>
+
+<body>
+    
+</body>
+
+<script src="DealOrNoDeal.js"></script>
+<script>
+	let game = new DealOrNoDeal(true);
+	
+	function openCase(case_number) {
+		game.openCase(case_number);
+	}
+
+	setTimeout(function(){
+		window.location.reload(1);
+	}, 500);
+</script>
+
+</html>

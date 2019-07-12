@@ -1,0 +1,33 @@
+html, body {
+	margin: 0;
+	font-family: Arial;
+}
+
+.cases {
+	border-radius: 10px;
+	background-color: #cceeff;
+	width: 10%;
+	float: left;
+	margin: 1%;
+	padding: 20px 5px 20px 5px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.case-open {
+	background-color: #CCCCCC;
+}
+
+.case-label {
+	font-size: 24px;
+}
+
+.case-value {
+	font-size: 16px;
+	color: #808080;
+}
+
+.divider {
+	clear: both;
+	border: 2px solid green;
+}
