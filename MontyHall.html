@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Monty Python Deal or No Deal</title>
+    <script src="jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="MyStyle.css">
+</head>
+
+<body>
+    
+</body>
+
+<script src="MontyHall.js"></script>
+
+<script>
+	let temp_game = new MontyHall(true, 3);
+
+	function openDoor(door_index) {
+		temp_game.openDoor(door_index);
+	}
+
+	setTimeout(function(){
+		//window.location.reload(1);
+	}, 500);
+</script>
+
+</html>
