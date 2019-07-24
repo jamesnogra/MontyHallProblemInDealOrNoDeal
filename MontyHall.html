@@ -14,7 +14,10 @@
 <script src="MontyHall.js"></script>
 
 <script>
-	let temp_game = new MontyHall(true, 3);
+	let temp_game;
+	for (let x=0; x<100; x++) {
+		temp_game = new MontyHall(true, 3);
+	}
 
 	function openDoor(door_index) {
 		temp_game.openDoor(door_index);

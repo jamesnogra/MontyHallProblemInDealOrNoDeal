@@ -5,6 +5,7 @@ class MontyHall {
 		this.doors = [];
 		this.choosen_door = -1;
 		this.game_done = false;
+		this.speed = 10;
 		
 		this.initializeDoors();
 		this.drawDoors();
@@ -12,21 +13,20 @@ class MontyHall {
 		if (auto_play_game) {
 			this.loop_counter = 0;
 			this.order_of_doors_to_open = this.randomShuffle(this.initializeOrderOfDoorsToOpen());
-			if (this.doors[this.order_of_doors_to_open[0]].grand_prize || this.doors[this.order_of_doors_to_open[this.num_doors-1]].grand_prize) {
-				this.autoPlay();
-				let result = {
-					'choosen_door_number': this.order_of_doors_to_open[0]+1,
-					'choosen_door_is_grand_prize': this.doors[this.order_of_doors_to_open[0]].grand_prize,
-					'last_door_number': this.order_of_doors_to_open[this.num_doors-1]+1,
-					'last_door_is_grand_prize': this.doors[this.order_of_doors_to_open[this.num_doors-1]].grand_prize,
-				};
-				let results = JSON.parse(localStorage.getItem("results"));
-				if (!results) {
-					results = [];
-				}
-				results.push(result);
-				localStorage.setItem("results", JSON.stringify(results));
+			this.moveGrandPrizeDoorToLast();
+			this.autoPlay();
+			let result = {
+				'choosen_door_number': this.order_of_doors_to_open[0]+1,
+				'choosen_door_is_grand_prize': this.doors[this.order_of_doors_to_open[0]].grand_prize,
+				'last_door_number': this.order_of_doors_to_open[this.num_doors-1]+1,
+				'last_door_is_grand_prize': this.doors[this.order_of_doors_to_open[this.num_doors-1]].grand_prize,
+			};
+			let results = JSON.parse(localStorage.getItem("results"));
+			if (!results) {
+				results = [];
 			}
+			results.push(result);
+			localStorage.setItem("results", JSON.stringify(results));
 		}
 	}
 
@@ -48,6 +48,7 @@ class MontyHall {
 		for (let x=0; x<this.num_doors; x++) {
 			temp_html += '<div id="door-'+x+'" onClick="openDoor('+x+');" class="door-container"><img src="images/door.png" /></div>';
 		}
+		$('body').html('');
 		$('body').append(temp_html);
 	}
 
@@ -103,7 +104,21 @@ class MontyHall {
 				this.autoPlay();
 			}
 			this.loop_counter++;
-		}, 0);
+		}, this.speed);
+	}
+
+	moveGrandPrizeDoorToLast = () => {
+		//if the grand prize is in the choose door, then we do not have to move it to the last
+		if (this.doors[0].grand_prize) {
+			return;
+		}
+		for (let x=1; x<this.num_doors; x++) {
+			if (this.doors[this.order_of_doors_to_open[x]].grand_prize) {
+				let temp_door = this.doors[this.order_of_doors_to_open[x]];
+				this.doors[this.order_of_doors_to_open[x]] = this.doors[this.order_of_doors_to_open[this.num_doors-1]];
+				this.doors[this.order_of_doors_to_open[this.num_doors-1]] = temp_door;
+			}
+		}
 	}
 
 	randomShuffle = (o) => {
