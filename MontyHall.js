@@ -27,6 +27,14 @@ class MontyHall {
 			}
 			results.push(result);
 			localStorage.setItem("results", JSON.stringify(results));
+
+			let result_string = "\n" + (this.order_of_doors_to_open[0]+1) + "," + this.doors[this.order_of_doors_to_open[0]].grand_prize + "," + (this.order_of_doors_to_open[this.num_doors-1]+1) + "," + this.doors[this.order_of_doors_to_open[this.num_doors-1]].grand_prize;
+			let results_string = localStorage.getItem("results_string");
+			if (!results_string) {
+				results_string = "choosen_door_number,choosen_door_is_grand_prize,last_door_number,last_door_is_grand_prize";
+			}
+			results_string += result_string;
+			localStorage.setItem("results_string", results_string);
 		}
 	}
 
