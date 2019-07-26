@@ -1,0 +1,11 @@
+choosen_door_number,choosen_door_is_grand_prize,last_door_number,last_door_is_grand_prize
+2,false,6,true
+5,false,10,true
+3,false,6,true
+10,true,4,false
+2,false,4,true
+6,true,8,false
+5,false,3,true
+4,false,8,true
+5,false,1,true
+9,false,4,true
